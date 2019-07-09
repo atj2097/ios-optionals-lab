@@ -14,13 +14,41 @@ Write 3 different ways of safely unwrapping and printing the value of `userName`
 - Method two: Optional binding
 
 - Method three: Nil coalescing
+```swift 
+var userName: String? = "Adam"
+print(userName!)
 
+if let name = userName {
+print(name)
+}
+
+userName = userName ?? "Adam"
+if let name = userName {
+print(name)
+}
+
+print(userName)
+
+
+
+```
 
 ## Question 2
 
 Given optional string `backgroundColor`, write code that safely unwraps and prints it. If backgroundColor is nil, give it a value.
 
-`var backgroundColor: String?`
+```swift 
+var backgroundColor: String?
+if var color = backgroundColor {
+print(color)
+} else {
+backgroundColor = "red "
+print(backgroundColor!)
+}
+
+
+
+```
 
 
 ## Question 3
@@ -28,8 +56,14 @@ Given optional string `backgroundColor`, write code that safely unwraps and prin
 Given an optional width and an optional height of a rectangle, write code that calculates and prints the area. Print an error message if either value is nil.
 
 ```swift
-var width: Double?
-var height: Double?
+var width: Double? = 12
+var height: Double? = 12
+if let width = width {
+if let height = height {
+print(width*height)
+}
+}
+
 ```
 
 
@@ -38,9 +72,13 @@ var height: Double?
 Given the following optional variables `name`, `age` and `height`. Write code so that it prints `name`, `age` and `height` if they all have a value. If any are nil, print an error message. Try using optional binding.
 
 ```swift
-var name: String?
+var name: String? = "Adam"
 var age: Int?
-var height: Double?
+var height: Double? = 60
+print(name ?? "No name")
+print(age ?? "No age")
+print(height ?? "No Height ")
+
 ```
 
 
@@ -52,6 +90,10 @@ Given the variables `firstName`, `middleName` and `lastName`. Create a variable 
 var firstName: String = "Johnny"
 var middleName: String?
 var lastName: String = "Stone"
+
+var fullName = " \(firstName)" + " " + "\(middleName  ?? "(No middle name)")" + " " + "\(lastName) "
+print(fullName)
+
 ```
 
 
@@ -59,7 +101,18 @@ var lastName: String = "Stone"
 
 Write code that adds 15 to `myIntString`, then prints the sum. Use the `Int()` constructor which returns an optional Int `(Int?)`.
 
-`let myIntString = "35"`
+```swift 
+var myIntString:String? = "35"
+//var unwrappedInt = myIntString ?? "No number"
+if let unwrappedInt = myIntString {
+if let intergerVersion = Int(unwrappedInt) {
+print(intergerVersion + 15)
+}
+}
+
+
+
+```
 
 
 ## Question 7
@@ -69,9 +122,28 @@ Given an optional tuple of optional Ints, write code to safely unwrap the tuple 
 ```swift
 var scores: (Int?, Int?, Int?)?
 
-var testCaseOne = (4, nil, 7)
-var testCaseTwo = (nil, nil, 9)
-var testCaseThree = (5, 10, 24)
+var testCaseOne:(Int?, Int?, Int?)? = (4, nil, 7)
+var testCaseTwo: (Int?, Int?, Int?)? = (nil, nil, 9)
+var testCaseThree: (Int?, Int?, Int?)? = (5, 10, 24)
+let testCases = [testCaseOne , testCaseTwo , testCaseThree]
+
+for tCase in testCases {
+var sum = 0
+if let currentCase = tCase {
+if let num1 = currentCase.0 {
+sum += num1
+}
+if let num2 = currentCase.1 {
+sum += num2
+}
+if let num3 = currentCase.2  {
+sum += num3
+}
+
+}
+print(sum)
+}
+
 ```
 
 
@@ -82,8 +154,13 @@ Safely unwrap `tuple` if there’s a non-nil tuple value and print it out.
 ```swift
 var tuple: (Int, Int)?
 if Bool.random() {
- tuple = (5, 3)
+tuple = (5, 3)
 }
+
+if let tupleValue = tuple {
+print(tupleValue)
+}
+
 ```
 
 
@@ -92,10 +169,19 @@ if Bool.random() {
 Write code that either doubles `myInt` and then prints it, or prints an error message if myInt is nil.
 
 ```swift
-let myInt: Int?
+var myDouble: Double?
+//let doubleTwo: Double = 5
+
 if Bool.random() {
- myInt = 5
+myDouble = 5
 }
+if let myDouble = myDouble {
+print(myDouble * 2)
+}
+else {
+print("error")
+}
+
 ```
 
 
@@ -108,8 +194,15 @@ var myDouble: Double?
 let doubleTwo: Double = 5
 
 if Bool.random() {
- myDouble = 12
+myDouble = 12
 }
+if let myDouble = myDouble {
+print(myDouble * doubleTwo)
+}
+else {
+print("error")
+}
+
 ```
 
 
@@ -121,8 +214,10 @@ Determine if the variable contains a Boolean or nil value. If nil set the variab
 var isTheGreatest: Bool?
 
 if Bool.random() {
- isTheGreatest = true
+isTheGreatest = true
 }
+print(isTheGreatest ?? false)
+
 ```
 
 
@@ -131,15 +226,18 @@ if Bool.random() {
 Given the code below print the sum of each non-nil element in `myTuple`.
 
  ```swift
-var myTuple: (Int?, Int?, Int?, Int?)
-
-if Bool.random() {
+ var myTuple: (Int?, Int?, Int?, Int?)
+ 
+ if Bool.random() {
  myTuple.0 = 5
  myTuple.2 = 14
-} else {
+ } else {
  myTuple.1 = 9
  myTuple.3 = 10
-}
+ }
+ if let number, number, number , number = myTuple {
+ 
+
 ```
 
 
@@ -205,8 +303,18 @@ Given an optional int `numberOfPeople`, write code that unwraps and prints it **
 var numberOfPeople: Int?
 
 if Bool.random() {
- numberOfPeople = 108
+numberOfPeople = 108
+
+if numberOfPeople ?? 0 % 2 == 0 {
+print(numberOfPeople!)
 }
+}
+
+if let people = numberOfPeople {
+
+}
+
+
 ```
 
 
@@ -228,7 +336,7 @@ for i in 0..<20 {
 Given the array `poorlyFormattedCityNames`, create a new array with the city names capitalized and any nil values removed.
 
 ```swift
-let poorlyFormattedCityNames: [String?] = ["new york", "BOSTON", nil, "chicago", nil, "los angeles", nil, "Dallas",]
+let poorlyFormattedCityNames: [String?] = ["new york", "BOSTON", nil, "chicago", nil, "los angeles", nil, "Dallas"]
 
 Output: ["New York", "Boston", "Chicago", "Los Angeles", "Dallas"]
 ```
